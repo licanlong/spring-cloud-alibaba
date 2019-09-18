@@ -1,0 +1,11 @@
+server:
+  port: 8082
+
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.0.102:8848
+
+  application:
+    name: server-consumer

@@ -1,0 +1,24 @@
+server:
+  port: 8088
+spring:
+  application:
+    name: spring-cloud-gateway
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.0.102:8848
+    gateway:
+      routes:
+        - id: service-consumer-feign
+          uri: lb://server-consumer-feign
+          predicates:
+            - Path=/consumer/**
+          filters:
+            - StripPrefix=1
+
+        - id: service-provider
+          uri: lb://service-provider
+          predicates:
+            - Path=/provider/**
+          filters:
+            - StripPrefix=1

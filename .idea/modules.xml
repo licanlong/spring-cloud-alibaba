@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/alibaba-config/alibaba-config.iml" filepath="$PROJECT_DIR$/alibaba-config/alibaba-config.iml" />
+      <module fileurl="file://$PROJECT_DIR$/oauth2-server/oauth2-server.iml" filepath="$PROJECT_DIR$/oauth2-server/oauth2-server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/service-consumer/service-consumer.iml" filepath="$PROJECT_DIR$/service-consumer/service-consumer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/service-consumer-feign/service-consumer-feign.iml" filepath="$PROJECT_DIR$/service-consumer-feign/service-consumer-feign.iml" />
+      <module fileurl="file://$PROJECT_DIR$/service-provide/service-provide.iml" filepath="$PROJECT_DIR$/service-provide/service-provide.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spring-cloud-alibaba.iml" filepath="$PROJECT_DIR$/spring-cloud-alibaba.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spring-cloud-gateway/spring-cloud-gateway.iml" filepath="$PROJECT_DIR$/spring-cloud-gateway/spring-cloud-gateway.iml" />
+    </modules>
+  </component>
+</project>

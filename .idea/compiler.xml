@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="alibaba-config" />
+        <module name="oauth2-server" />
+        <module name="service-consumer" />
+        <module name="service-consumer (1)" />
+        <module name="service-consumer-feign" />
+        <module name="service-provide" />
+        <module name="spring-cloud-gateway" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="alibaba-config" target="1.8" />
+      <module name="oauth2-server" target="1.8" />
+      <module name="service-consumer" target="1.8" />
+      <module name="service-consumer (1)" target="1.8" />
+      <module name="service-consumer-feign" target="1.8" />
+      <module name="service-provide" target="1.8" />
+      <module name="spring-cloud-alibaba" target="1.8" />
+      <module name="spring-cloud-gateway" target="1.8" />
+      <module name="SpringCloudAlibaba" target="1.5" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
