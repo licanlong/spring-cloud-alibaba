@@ -1,6 +1,7 @@
 package com.licanlong.feign;
 
 import com.licanlong.feign.fallback.HelloServiceFallback;
+import com.licl.HelloWorldService;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.RequestMapping;
 

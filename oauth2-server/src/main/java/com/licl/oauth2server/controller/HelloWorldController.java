@@ -3,9 +3,7 @@ package com.licl.oauth2server.controller;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import sun.plugin.liveconnect.SecurityContextHelper;
 
-import java.security.Security;
 
 /**
  * @author licl

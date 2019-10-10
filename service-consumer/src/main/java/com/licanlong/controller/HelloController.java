@@ -13,6 +13,7 @@ import org.springframework.web.client.RestTemplate;
 public class HelloController {
     @Autowired
     private RestTemplate restTemplate;
+
     @RequestMapping("/hello")
     public String hello(){
         return restTemplate.getForObject("http://service-provider/hello", String.class);
