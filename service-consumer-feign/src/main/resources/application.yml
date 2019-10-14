@@ -6,7 +6,7 @@ spring:
     nacos:
       discovery:
       #nacos注册中心
-        server-addr: 192.168.0.22:8848
+        server-addr: 192.168.0.21:8848
 
   application:
     name: server-consumer-feign
@@ -25,7 +25,7 @@ spring:
 # 断路器配置:com.netflix.hystrix.HystrixCommandProperties
 feign:
   hystrix:
-    enabled: true
+    enabled: false
 
 hystrix:
   command:
