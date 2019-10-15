@@ -1,0 +1,25 @@
+server:
+  port: 8084
+
+spring:
+  application:
+    name: server-consumer-sentinel
+  main:
+    allow-bean-definition-overriding: true
+  cloud:
+    sentinel:
+      transport:
+        port: 8719
+        dashboard: http://localhost:8080
+      eager: true
+    nacos:
+      discovery:
+        server-addr: 192.168.0.21:8848
+feign:
+  sentinel:
+    enabled: true
+
+
+
+
+

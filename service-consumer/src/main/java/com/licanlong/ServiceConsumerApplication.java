@@ -1,5 +1,7 @@
 package com.licanlong;
 
+import com.alibaba.cloud.nacos.ribbon.NacosRule;
+import com.netflix.loadbalancer.IRule;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
@@ -19,4 +21,8 @@ public class ServiceConsumerApplication {
 		return new RestTemplate();
 	}
 
+	@Bean
+	public IRule nacosRule(){
+		return new NacosRule();
+	}
 }

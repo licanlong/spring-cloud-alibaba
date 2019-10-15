@@ -38,29 +38,127 @@
 
 ​	这里以nacos为例：官方文档：<https://nacos.io/zh-cn/docs/what-is-nacos.html>
 
+​	1）、引入依赖：	
+
+```xml
+		<dependency>
+			<groupId>com.alibaba.cloud</groupId>
+			<artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+		</dependency>
+```
+
+​	2)、添加注解：
+
+```java
+@SpringBootApplication
+//启动注册中心客服端功能
+@EnableDiscoveryClient
+public class ServiceProvideApplication {
+	public static void main(String[] args) {
+		SpringApplication.run(ServiceProvideApplication.class, args);
+	}
+}
+```
+
+​	3）、配置文件
+
+```yaml
+server:
+  port: 8081
+spring:
+  application:
+  //服务名称
+    name: service-provider
+  cloud:
+    nacos:
+      discovery:
+      //注册中心地址
+        server-addr: 192.168.0.21:8848
+```
 
 
-​		
 
 
 
+## 二、服务调用
+
+### 1、介绍
+
+​	微服务架构中，业务都会被拆分成一个独立的服务，服务与服务的通讯是基于http restful的。Spring cloud有两种服务调用方式，一种是ribbon+restTemplate，另一种是feign。接下来分别对这两种的进行讲解。服务的调用还是在上一节服务的注册和发现的基础上进行的。
+
+
+### 2、RestTemplate
+
+```java
+	@Bean
+	//开启负载均衡功能
+	@LoadBalanced
+	public RestTemplate restTemplate(){
+		return new RestTemplate();
+	}
+```
+
+```java
+@RestController
+public class HelloController {
+    @Autowired
+    private RestTemplate restTemplate;
+
+    @RequestMapping("/hello")
+    public String hello(){
+        return restTemplate.getForObject("http://service-provider/hello", String.class);
+    }
+}
+```
 
 
 
+### 3、OpenFeign
+
+### 简介：
+
+| 名称                     | 说明                                       | 官方文档                                     |
+| ---------------------- | ---------------------------------------- | ---------------------------------------- |
+| Feign                  | Feign是Netflix开发的声明式、模板化的HTTP客户端， Feign可以帮助我们更快捷、优雅地调用HTTP API | https://github.com/OpenFeign/feign       |
+| Hystrix                | Hystrix是Netflix开源的一款容错框架，同样具有自我保护能力。为了实现容错和自我保护 | <https://github.com/Netflix/hystrix>     |
+| Ribbon                 | Netflix发布的开源项目，主要功能是提供客户端的软件负载均衡算法       | https://github.com/Netflix/ribbon        |
+| Spring Cloud OpenFeign | 是基于Netflix feign实现，使Feign支持了Spring MVC注解，从而让Feign的使用更加方便,还整合了Spring Cloud Ribbon和Spring Cloud Hystrix | <https://cloud.spring.io/spring-cloud-static/spring-cloud-openfeign/2.1.3.RELEASE/single/spring-cloud-openfeign.html> |
 
 
 
+### 使用
 
+1）、引入依赖：
 
+```xml
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-openfeign</artifactId>
+		</dependency>
+```
 
+2）、添加注解：
 
+```java
+@SpringBootApplication
+//开启Feign客户端功能
+@EnableFeignClients
+public class ServiceConsumerFeignApplication {
+	public static void main(String[] args) {
+		SpringApplication.run(ServiceConsumerFeignApplication.class, args);
+	}
+}
+```
 
+2)、编写服务调用接口
 
-
-
-
-
-
+```java
+@FeignClient(value = "service-provider")
+public interface HelloService {
+    @RequestMapping("/hello")
+    String hello();
+}
+```
 
 
 

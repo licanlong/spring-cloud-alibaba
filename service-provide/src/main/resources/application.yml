@@ -7,13 +7,5 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: 192.168.0.22:8848
+        server-addr: 192.168.0.21:8848
         weight: 1
-    sentinel:
-        transport:
-          port: 8719
-          dashboard: localhost:8080
-        eager: true
-        enabled: true
-        filter:
-          enabled: true

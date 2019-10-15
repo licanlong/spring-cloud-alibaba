@@ -22,11 +22,13 @@ spring:
          retryer: feign.Retryer.Default
 
 
-# 断路器配置:com.netflix.hystrix.HystrixCommandProperties
 feign:
   hystrix:
-    enabled: false
+    enabled: true
 
+
+
+# 断路器配置 hystrix:com.netflix.hystrix.HystrixCommandProperties
 hystrix:
   command:
     default:
@@ -34,6 +36,5 @@ hystrix:
         isolation:
           thread:
             timeoutInMilliseconds: 20000
-
 
 
