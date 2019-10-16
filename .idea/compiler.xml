@@ -8,9 +8,11 @@
         <outputRelativeToContentRoot value="true" />
         <module name="alibaba-config" />
         <module name="oauth2-server" />
+        <module name="service-api" />
         <module name="service-consumer" />
         <module name="service-consumer (1)" />
         <module name="service-consumer-feign" />
+        <module name="service-consumer-sentinel" />
         <module name="service-provide" />
         <module name="spring-cloud-gateway" />
       </profile>
@@ -18,9 +20,11 @@
     <bytecodeTargetLevel>
       <module name="alibaba-config" target="1.8" />
       <module name="oauth2-server" target="1.8" />
+      <module name="service-api" target="1.8" />
       <module name="service-consumer" target="1.8" />
       <module name="service-consumer (1)" target="1.8" />
       <module name="service-consumer-feign" target="1.8" />
+      <module name="service-consumer-sentinel" target="1.8" />
       <module name="service-provide" target="1.8" />
       <module name="spring-cloud-alibaba" target="1.8" />
       <module name="spring-cloud-gateway" target="1.8" />

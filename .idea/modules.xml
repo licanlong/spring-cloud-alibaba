@@ -4,8 +4,10 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/alibaba-config/alibaba-config.iml" filepath="$PROJECT_DIR$/alibaba-config/alibaba-config.iml" />
       <module fileurl="file://$PROJECT_DIR$/oauth2-server/oauth2-server.iml" filepath="$PROJECT_DIR$/oauth2-server/oauth2-server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/service-api/service-api.iml" filepath="$PROJECT_DIR$/service-api/service-api.iml" />
       <module fileurl="file://$PROJECT_DIR$/service-consumer/service-consumer.iml" filepath="$PROJECT_DIR$/service-consumer/service-consumer.iml" />
       <module fileurl="file://$PROJECT_DIR$/service-consumer-feign/service-consumer-feign.iml" filepath="$PROJECT_DIR$/service-consumer-feign/service-consumer-feign.iml" />
+      <module fileurl="file://$PROJECT_DIR$/service-consumer-sentinel/service-consumer-sentinel.iml" filepath="$PROJECT_DIR$/service-consumer-sentinel/service-consumer-sentinel.iml" />
       <module fileurl="file://$PROJECT_DIR$/service-provide/service-provide.iml" filepath="$PROJECT_DIR$/service-provide/service-provide.iml" />
       <module fileurl="file://$PROJECT_DIR$/spring-cloud-alibaba.iml" filepath="$PROJECT_DIR$/spring-cloud-alibaba.iml" />
       <module fileurl="file://$PROJECT_DIR$/spring-cloud-gateway/spring-cloud-gateway.iml" filepath="$PROJECT_DIR$/spring-cloud-gateway/spring-cloud-gateway.iml" />

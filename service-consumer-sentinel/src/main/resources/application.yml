@@ -1,5 +1,5 @@
 server:
-  port: 8084
+  port: 8085
 
 spring:
   application:
@@ -14,12 +14,9 @@ spring:
       eager: true
     nacos:
       discovery:
-        server-addr: 192.168.0.21:8848
+        server-addr: 192.168.0.23:8848
 feign:
   sentinel:
     enabled: true
-
-
-
 
 

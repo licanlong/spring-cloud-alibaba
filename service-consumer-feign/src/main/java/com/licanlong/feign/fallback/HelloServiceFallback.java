@@ -9,14 +9,9 @@ import org.springframework.stereotype.Component;
  * @date 2019/9/1
  */
 @Component
-public class HelloServiceFallback implements FallbackFactory<HelloService>{
+public class HelloServiceFallback implements HelloService{
     @Override
-    public HelloService create(Throwable throwable) {
-        return new HelloService() {
-            @Override
-            public String hello() {
-                return "HelloService调用失败："+throwable.getClass().getName();
-            }
-        };
+    public String hello() {
+        return "HelloService调用失败";
     }
 }

@@ -25,7 +25,7 @@
         <module>service-api</module>
         <module>service-consumer-sentinel</module>
     </modules>
-
+    <!--微服务组件依赖管理-->
     <dependencyManagement>
         <dependencies>
             <dependency>

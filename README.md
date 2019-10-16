@@ -1,6 +1,6 @@
 # 微服务笔记
 
-### 前言：
+### 技术栈介绍：
 
 ​	SpringCould就是对微服务的一个具体规范实现； 微服务基于SpringCloud来实现， 而SpringCloud是基于SpringBoot开发的；对于SpringCloud 的这套规范，有两个具体实现就是SCA和SCN。
 
@@ -92,7 +92,7 @@ SCA中的组件：
 
 ​	这里以nacos为例：官方文档：<https://nacos.io/zh-cn/docs/what-is-nacos.html>
 
-​	1）、引入依赖：	
+​	1)、引入依赖：	
 
 ```xml
 		<dependency>
@@ -114,7 +114,7 @@ public class ServiceProvideApplication {
 }
 ```
 
-​	3）、配置文件
+​	3)、配置文件
 
 ```yaml
 server:
@@ -244,7 +244,7 @@ public class HelloServiceFallback implements HelloService{
     }
 }
 
-//或者
+//这种写法可以得到具体的异常
 @Component
 public class HelloServiceFallbackFactory implements FallbackFactory<HelloService>{
     @Override
@@ -262,7 +262,7 @@ public class HelloServiceFallbackFactory implements FallbackFactory<HelloService
 
 5）Ribbon的负载均衡策略
 
-​	默认情况下使用Ribbon是RoundRobinRule（轮询）如果需要修改策略，则需要向spring ioc 容器 注入IRule接口的实现类，如：
+​	默认情况下Ribbon使用RoundRobinRule（轮询）如果需要修改策略，则需要向spring ioc 容器 注入IRule接口的实现类，如：
 
 ```java
 	@Bean

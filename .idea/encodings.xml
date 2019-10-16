@@ -4,8 +4,10 @@
     <file url="file://$PROJECT_DIR$" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/alibaba-config" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/oauth2-server" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/service-api" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/service-consumer" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/service-consumer-feign" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/service-consumer-sentinel" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/service-provide" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/spring-cloud-gateway" charset="UTF-8" />
   </component>
