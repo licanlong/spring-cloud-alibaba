@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author licl
  * @date 2019/9/1
  */
+
 @RestController
 @RefreshScope
 public class ConfigController {
@@ -17,13 +18,12 @@ public class ConfigController {
     @Value("${current.env}")
     private String env;
 
-
     @GetMapping("/config")
     public String getConfig(){
         return config;
     }
 
-    @GetMapping("env")
+    @GetMapping("/env")
     public String getCurrentEnv(){
         return env;
     }

@@ -12,11 +12,12 @@ spring:
         port: 8719
         dashboard: http://localhost:8080
       eager: true
+
     nacos:
       discovery:
         server-addr: 192.168.0.23:8848
+
 feign:
   sentinel:
     enabled: true
-
 

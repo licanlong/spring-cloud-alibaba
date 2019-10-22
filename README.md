@@ -16,7 +16,7 @@
 
 ​	断路器——Netflix Hystrix : 对服务做限流、降级、隔断来做处理
 
-​	服务网关——Netflix Zuul ： 服务网关， 所用的请求都通过网关进行发送，进行一些过滤审计。
+​	服务网关——Netflix Zuul：服务网关， 所用的请求都通过网关进行发送，进行一些过滤审计。
 
 ​	分布式配置——Spring Cloud Config 自动化配置
 
@@ -26,9 +26,9 @@
 
 SCA中的组件：
 
-​	Sentinel：把流量作为切入点，从流量控制、熔断降级、系统负载保护等多个维度保护服务的稳定性。
+​	**Sentinel**：把流量作为切入点，从流量控制、熔断降级、系统负载保护等多个维度保护服务的稳定性。
 
-​	Nacos：一个更易于构建云原生应用的动态服务发现、配置管理和服务管理平台。
+​	**Nacos**：一个更易于构建云原生应用的动态服务发现、配置管理和服务管理平台。
 
 ​	RocketMQ：一款开源的分布式消息系统，基于高可用分布式集群技术，提供低延时的、高可靠的消息发布与订阅服务。
 
@@ -54,7 +54,7 @@ SCA中的组件：
 
 
 
-## 一、注册中心
+## 一、注册中心	
 
 ### 1、是什么？
 
@@ -121,7 +121,7 @@ server:
   port: 8081
 spring:
   application:
-  //服务名称
+  #服务名称
     name: service-provider
   cloud:
     nacos:
@@ -176,9 +176,9 @@ public class HelloController {
 
 
 
-### 3、OpenFeign
+### 3、Feign
 
-### 简介：
+#### 简介：
 
 | 名称                     | 说明                                       | 官方文档                                     |
 | ---------------------- | ---------------------------------------- | ---------------------------------------- |
@@ -187,9 +187,60 @@ public class HelloController {
 | Ribbon                 | Netflix发布的开源项目，主要功能是提供客户端的软件负载均衡算法       | https://github.com/Netflix/ribbon        |
 | Spring Cloud OpenFeign | 是基于Netflix feign实现，使Feign支持了Spring MVC注解，从而让Feign的使用更加方便,还整合了Spring Cloud Ribbon和Spring Cloud Hystrix | <https://cloud.spring.io/spring-cloud-static/spring-cloud-openfeign/2.1.3.RELEASE/single/spring-cloud-openfeign.html> |
 
+#### feign示例:
+
+​	功能：请求githup接口,获取特定用户项目的贡献者（如OpenFeign账号的Feign项目）：			<https://api.github.com/repos/OpenFeign/feign/contributors>
+
+```java
+/**
+ * @author licl
+ * @date 2019/10/21
+ */
+public class FeignTest {
+    interface GitHub {
+        @RequestLine("GET /repos/{owner}/{repo}/contributors")
+        List<Contributor> contributors(@Param("owner") String owner, @Param("repo") String repo);
+    }
+  
+	//接收实体
+    @Data
+    static class Contributor {
+        String login;
+        int contributions;
+    }
+
+    public static void main(String... args) {
+       //构建代理对象
+        GitHub github = Feign.builder()
+                .decoder(new JacksonDecoder())
+                .target(GitHub.class, "https://api.github.com");
+
+        List<Contributor> contributors = github.contributors("OpenFeign", "feign");
+        for (Contributor contributor : contributors) {
+            System.out.println(contributor.login + " (" + contributor.contributions + ")");
+        }
+
+    }
+}
+```
+
+#### Hystrix：
+
+​	一般在微服架构中，有一个组件角色叫熔断器。顾名思义，熔断器起的作用就是在特定的场景下关掉当前的通路，从而起到保护整个系统的效果。
+
+在微服务架构中，一般我们的独立服务是比较多的，每个独立服务之间划分责任边界，并通过约定协议接口来进行通信。当我们的调用链路复杂依赖多时，很可能会发生雪崩效应。
+
+Hystrix的介绍：<https://github.com/Netflix/Hystrix/wiki>
+
+ tomcat工作流程图： 
+
+![img](https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=835833903,4223488043&fm=26&gp=0.jpg)
+
+​	假定Tomcat最大并发数为100（工作线程为100），假定正常情况下一次请求完成时间为50ms，那么每秒可以处理2000个请求（tps/qps）
 
 
-### 使用：
+
+#### OpenFeign 使用：
 
 1）、引入依赖：
 
@@ -273,24 +324,100 @@ public class HelloServiceFallbackFactory implements FallbackFactory<HelloService
 
 
 
+## 三、微服务配置中心
+
+### 1、是什么？
+
+​	　集中式配置是将应用系统中对配置信息的管理作为一个新的应用功能模块，区别与传统的配置信息分散到系统各个角落方式，进行集中统一管理，并且提供额外功能。尤其是在微服务架构中，是不可或缺组件，甚至是必要组件之一。
 
 
 
+### 2、有什么用？
+
+​	在微服务体系中，服务的数量以及配置信息的日益增多，比如各种服务器参数配置、各种数据库访问参数配置、各种环境下配置信息的不同、配置信息修改之后实时生效等等，传统的配置文件方式或者将配置信息存放于数据库中的方式已无法满足开发人员对配置管理的要求，如：
+
+安全性：配置跟随源代码保存在代码库中，容易造成配置泄漏
+时效性：修改配置，需要重启服务才能生效
+局限性：无法支持动态调整：例如日志开关、功能开关
 
 
 
+### 3、有哪些？
+
+Apollo（阿波罗）：是携程框架部门研发的分布式配置中心，能够集中化管理应用不同环境、不同集群的配置，配置修改后能够实时推送到应用端，并且具备规范的权限、流程治理等特性，适用于微服务配置管理场景。
+
+XDiamond：全局配置中心，存储应用的配置项，解决配置混乱分散的问题。名字来源于淘宝的开源项目diamond，前面加上一个字母X以示区别。
+
+Qconf： 奇虎 360 内部分布式配置管理工具。 用来替代传统的配置文件，使得配置信息和程序代码分离，同时配置变化能够实时同步到客户端，而且保证用户高效读取配置，这使的工程师从琐碎的配置修改、代码提交、配置上线流程中解放出来，极大地简化了配置管理工作。
+
+Disconf：百度的分布式配置管理平台，专注于各种「分布式系统配置管理」的「通用组件」和「通用平台」, 提供统一的「配置管理服务」
+
+**SpringCloudConfig**：为分布式系统中的外部配置提供服务器和客户端支持。
+
+**Nacos**:  可用于发现、配置和管理微服务。
 
 
 
+### 4、怎么用？
 
+​	这里以nacos为例：官方文档：<https://nacos.io/zh-cn/docs/what-is-nacos.html>
 
+​	1)、引入依赖：	
 
+```xml
+		<dependency>
+			<groupId>com.alibaba.cloud</groupId>
+			<artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+		</dependency>
+```
 
+​	2)、在 **bootstrap.yml**配置 Nacos server 的地址和应用名
 
+```yaml
+spring:
+  application:
+    name: alibaba-config
+  cloud:
+    nacos:
+      config:
+        server-addr: 192.168.0.22:8848
+        file-extension: yaml
+```
 
+​	3)、通过 Spring Cloud 原生注解 `@RefreshScope` 实现配置自动更新：	
 
+```java
+@RestController
+@RefreshScope
+public class ConfigController {
+    @Value("${config}")
+    private String config;
+    @GetMapping("/config")
+    public String getConfig(){
+        return config;
+    }
+}
+```
 
+### 5)、配置加载优先级
 
+​		1、项目根路径:   bootstrap.properties/bootstrap.yml
 
+​		2、项目根路径：application.properties/application.yml
+
+​		3、命令行参数：如 -Dserver.port=8080 
+
+​		*注意*：**如果存在相同配置后加载的会覆盖先加载的，优先使用配置中心的配置**
 
 ​	
+
+
+
+
+
+
+
+
+
+
+

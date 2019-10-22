@@ -9,6 +9,7 @@
         <option value="$PROJECT_DIR$/alibaba-config/pom.xml" />
         <option value="$PROJECT_DIR$/oauth2-server/pom.xml" />
         <option value="$PROJECT_DIR$/service-consumer-sentinel/pom.xml" />
+        <option value="$PROJECT_DIR$/oauth2-resource-server/pom.xml" />
       </list>
     </option>
   </component>

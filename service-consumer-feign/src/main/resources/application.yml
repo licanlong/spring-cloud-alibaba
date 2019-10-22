@@ -7,23 +7,18 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: 192.168.0.21:8848
+        server-addr: 192.168.0.22:8848
 
 #hystrix功能开关
 feign:
-  hystrix:
-    enabled: false
   client:
     config:
       default:
         readTimeout : 5000
         retryer: feign.Retryer.Default
 
-# ribbon 可配置 com.netflix.client.config.DefaultClientConfigImpl
-ribbon:
-  ReadTimeout: 5000
-  ConnectTimeout: 5000
-  OkToRetryOnAllOperations: false
+  hystrix:
+    enabled: true
 
 # hystrix 可配置 hystrix:com.netflix.hystrix.HystrixCommandProperties
 hystrix:
@@ -33,4 +28,12 @@ hystrix:
         isolation:
           thread:
             timeoutInMilliseconds: 5000
+
+
+# ribbon 可配置 com.netflix.client.config.DefaultClientConfigImpl
+ribbon:
+  ReadTimeout: 5000
+  ConnectTimeout: 5000
+  OkToRetryOnAllOperations: false
+
 

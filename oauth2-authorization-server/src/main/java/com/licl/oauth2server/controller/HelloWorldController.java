@@ -17,7 +17,6 @@ public class HelloWorldController {
 
     @RequestMapping("/hello")
     public String hello() throws InterruptedException {
-
         return "hello"+port;
     }
 }

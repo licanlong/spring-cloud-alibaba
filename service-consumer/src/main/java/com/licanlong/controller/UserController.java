@@ -11,7 +11,7 @@ import java.util.Map;
  * @author licl
  * @date 2019/8/31
  *
- * restful风格 api
+ * restful风格 Http API
  *  GET http://localhost:8082/user/1
  *  POST http://localhost:8082/user
  *  PUT http://localhost:8082/user

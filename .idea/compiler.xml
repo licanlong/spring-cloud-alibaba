@@ -7,6 +7,8 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="alibaba-config" />
+        <module name="oauth2-authorization-server" />
+        <module name="oauth2-resource-server" />
         <module name="oauth2-server" />
         <module name="service-api" />
         <module name="service-consumer" />
@@ -19,6 +21,8 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="alibaba-config" target="1.8" />
+      <module name="oauth2-authorization-server" target="1.8" />
+      <module name="oauth2-resource-server" target="1.8" />
       <module name="oauth2-server" target="1.8" />
       <module name="service-api" target="1.8" />
       <module name="service-consumer" target="1.8" />

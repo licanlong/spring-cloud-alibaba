@@ -24,6 +24,8 @@
         <module>spring-cloud-gateway</module>
         <module>service-api</module>
         <module>service-consumer-sentinel</module>
+        <module>oauth2-authorization-server</module>
+        <module>oauth2-resource-server</module>
     </modules>
     <!--微服务组件依赖管理-->
     <dependencyManagement>

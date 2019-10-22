@@ -5,8 +5,8 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: 192.168.0.21:8848
-        register-enabled: true
+        server-addr: 192.168.43.52:8848
+        register-enabled: false
 
   application:
     name: server-consumer
