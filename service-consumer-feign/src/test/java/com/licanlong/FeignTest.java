@@ -13,6 +13,7 @@ import java.util.List;
  * @date 2019/10/21
  */
 public class FeignTest {
+
     interface GitHub {
         @RequestLine("GET /repos/{owner}/{repo}/contributors")
         List<Contributor> contributors(@Param("owner") String owner, @Param("repo") String repo);
@@ -23,6 +24,7 @@ public class FeignTest {
         String login;
         int contributions;
     }
+
 
     public static void main(String... args) {
         GitHub github = Feign.builder()

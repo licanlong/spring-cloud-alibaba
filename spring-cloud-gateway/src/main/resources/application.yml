@@ -10,6 +10,7 @@ spring:
     gateway:
       routes:
         - id: service-consumer-feign
+        # lb://‘serviceId’前代表路由的服务
           uri: lb://server-consumer-feign
           predicates:
             - Path=/consumer/**

@@ -84,7 +84,7 @@ SCA中的组件：
 - Spring Cloud Netflix Eureka
 - Spring Cloud Zookeeper
 - Spring Cloud Consul
-- Spring Cloud Alibaba Nacos
+- **Spring Cloud Alibaba Nacos**
 
 
 
@@ -189,7 +189,7 @@ public class HelloController {
 
 #### feign示例:
 
-​	功能：请求githup接口,获取特定用户项目的贡献者（如OpenFeign账号的Feign项目）：			<https://api.github.com/repos/OpenFeign/feign/contributors>
+​	功能：请求github接口,获取特定用户项目的贡献者（如OpenFeign账号的Feign项目）：			<https://api.github.com/repos/OpenFeign/feign/contributors>
 
 ```java
 /**
@@ -224,7 +224,7 @@ public class FeignTest {
 }
 ```
 
-#### Hystrix：
+#### Hystrix(停止更新)：
 
 ​	一般在微服架构中，有一个组件角色叫熔断器。顾名思义，熔断器起的作用就是在特定的场景下关掉当前的通路，从而起到保护整个系统的效果。
 
@@ -399,7 +399,9 @@ public class ConfigController {
 }
 ```
 
-### 5)、配置加载优先级
+### 5、配置加载优先级
+
+​	由低到高
 
 ​		1、项目根路径:   bootstrap.properties/bootstrap.yml
 
@@ -407,17 +409,86 @@ public class ConfigController {
 
 ​		3、命令行参数：如 -Dserver.port=8080 
 
-​		*注意*：**如果存在相同配置后加载的会覆盖先加载的，优先使用配置中心的配置**
+​		4、配置中心
 
 ​	
 
 
 
+## 四、微服务网关
+
+### 1、是什么？
+
+- API网是一个反向路由：屏蔽内部细节，为调用者提供统一入口，接收所有调用者请求，通过路由机制转发到服务实例。
+
+- API网关是一组“过滤器”集合：可以实现一系列与核心业务无关的横切面功能，如安全认证、限流熔断、日志监控。
+
+  ![img](https://upload-images.jianshu.io/upload_images/12191355-633a6109c2e10d15.png?imageMogr2/auto-orient/strip|imageView2/2/w/1035/format/webp)
 
 
 
+### 2、有什么用？
+
+​	微服务每个服务可以独立部署并且互相隔离，对外提供不同服务，这样会造成客户端从原来传统服务的"1对1”变成了微服务体系下的"1对N"，微服务体系下解决"1对N"问题方案就是在所有微服务的上层在抽象封装一层，微服务网关层。用于对外统一提供服务，屏蔽内部独立服务的访问，同时子服务的添加，移除对外无感知，增加了系统的扩展性。
+
+​	与传统单一服务对比，微服务由于分割成无数个单独的子服务，那么在，鉴权、流控、校验等预处理的逻辑，每个单独子服务都需要编写，造成代码多处冗余，同时业务变动也需要所有的子服务变更。那么将这些预处理逻辑抽象统一到上层网关层做就变得很有意义了，子服务只需关注自身业务逻辑的处理。
 
 
 
+### 3、有哪些？
+
+zuul ：netflix开源的一个API Gateway 服务器, 本质上是一个web servlet应用,同时与springcloud无缝的集成
+
+**springcloud-gateway**：是spring团队开发非阻塞的IO 的API网关。
 
 
+
+### 4、怎么用？
+
+​	以springcloud-gateway为例：
+
+​	推荐学习博客：<https://blog.csdn.net/liuzhengwangyang/article/details/88868618>
+
+1）引入依赖：
+
+```xml
+<dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-starter-gateway</artifactId>
+</dependency>
+<!-- 注册中心 -->
+ <dependency>
+     <groupId>com.alibaba.cloud</groupId>
+     <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+ </dependency>
+```
+
+
+
+2）配置文件：
+
+```yaml
+spring:
+  application:
+    name: spring-cloud-gateway
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.0.22:8848
+    gateway:
+      routes:
+        - id: service-consumer-feign
+        # lb://‘serviceId’前代表路由的服务，当然也可以直接写域名
+          uri: lb://server-consumer-feign
+          predicates:
+            - Path=/consumer/**
+          filters:
+            - StripPrefix=1
+
+        - id: service-provider
+          uri: lb://service-provider
+          predicates:
+            - Path=/provider/**
+          filters:
+            - StripPrefix=1
+```
